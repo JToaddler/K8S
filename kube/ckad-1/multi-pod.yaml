@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: multi-pod
+  name: multi-pod
+spec:
+  volumes: 
+  - name: vol
+    emptyDir: {}
+  containers:
+  - image: alpine:3.12.0
+    name: pod-1
+    command: ["sh", "-c", " while true; do sleep 5; echo 'POD-1'; done "]
+    resources: {}
+    volumeMounts:
+    - name: vol
+      mountPath: /etc/a
+  - image: alpine:3.12.0
+    name: pod-2
+    command: ["sh", "-c", " while true; do sleep 5; echo 'POD-2'; done "]
+    resources: {}
+    volumeMounts:
+    - name: vol
+      mountPath: /etc/b
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}

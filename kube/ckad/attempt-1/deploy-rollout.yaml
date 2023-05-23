@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: deploy-apply
+  name: deploy-apply
+  namespace: anto
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+    maxSurge: 1
+    maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: deploy-apply
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: deploy-apply
+    spec:
+      containers:
+      - image: nginx:1.23.3
+        name: nginx
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}

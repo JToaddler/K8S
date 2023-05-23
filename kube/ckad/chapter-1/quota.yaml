@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata: 
+  name: quota
+  namespace: ckad
+  labels: 
+    ver: "1"
+spec:
+  hard: 
+    pods: 1
+    requests.cpu: "0.5"
+    requests.memory: 512m
+    limits.cpu : "1"
+    limits.memory: 1024m

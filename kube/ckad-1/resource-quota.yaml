@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: List
+items:
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: pf-quota
+    namespace: project-firebird
+  spec:
+    hard:
+      secrets: 1

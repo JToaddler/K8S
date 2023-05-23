@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: "2022-12-22T18:11:26Z"
+  generation: 1
+  name: google-ping
+  namespace: default
+  resourceVersion: "999845"
+  uid: c4fbc75f-cae7-4ef9-b821-d2ecd389a213
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: google-ping
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - command:
+            - sh
+            - -c
+            - curl google.com
+            image: nginx
+            imagePullPolicy: Always
+            name: google-ping
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: '*/2 * * * *'
+  successfulJobsHistoryLimit: 7
+  suspend: false
+status:
+  lastScheduleTime: "2022-12-22T18:16:00Z"
+  lastSuccessfulTime: "2022-12-22T18:16:07Z"
